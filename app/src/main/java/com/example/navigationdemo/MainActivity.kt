@@ -12,6 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.navigationdemo.ui.theme.NavigationDemoTheme
 
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.navigationdemo.screens.Home
+import com.example.navigationdemo.screens.Profile
+import com.example.navigationdemo.screens.Welcome
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +39,23 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
 
+    val navController = rememberNavController()
+
+    NavHost(
+        navController = navController,
+        startDestination = NavRoutes.Home.route
+    ) {
+        composable(NavRoutes.Home.route) {
+            Home(navController = navController)
+        }
+        composable(NavRoutes.Welcome.route) {
+            Welcome(navController = navController)
+        }
+        composable(NavRoutes.Profile.route) {
+            Profile()
+        }
+    }
+
 }
 
 @Preview(showBackground = true)
@@ -41,3 +65,15 @@ fun DefaultPreview() {
         MainScreen()
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
